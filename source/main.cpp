@@ -8,22 +8,24 @@ int main() {
     using namespace odachi::datastructures::buffers;
 
     heap_allocator allocator;
-    circular_buffer<int, heap_allocator, 10> buffer(allocator);
+    circular_buffer<int, 10> buffer;
 
     for(auto i = 0; i < 50; ++i){
-        buffer.push_back(i);
+        buffer.enqueue(i);
     }
 
     decltype(buffer) b = buffer;
     decltype(buffer) c(allocator);
     c = b;
 
+    c.dequeue();
+
     for(auto i = 0; i < 10; ++i){
         std::cout << "Index: " << i << ", Contains: " << c[i] << "\n";
     }
 
-    std::cout << "Capacity: " << b.capacity() << ", Size: " << b.size() <<
-              ", Position: " << b.position() << ", Free Slots: " << b.free_slots() << "\n";
+    std::cout << "Capacity: " << c.capacity() << ", Size: " << c.size() <<
+              ", Position: " << c.head() << ", Free Slots: " << c.free_slots() << "\n";
 
     return 0;
 }
