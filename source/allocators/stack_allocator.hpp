@@ -26,7 +26,7 @@ namespace odachi{
         }
 
         void* stack_allocator::allocate(size_t size) {
-            return block_++;
+            return block_;
         }
 
         void stack_allocator::deallocate(void* address) {
